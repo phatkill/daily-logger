@@ -3,9 +3,11 @@
   "short_name": "DailyLogger",
   "description": "Bấm 1 nút ghi lại mọi việc trong ngày - Nhanh gọn, không cần điền form",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#F2F2F7",
-  "theme_color": "#F2F2F7",
+  "display_override": ["standalone", "fullscreen"],
+  "background_color": "#F3F4F6",
+  "theme_color": "#F3F4F6",
   "orientation": "portrait",
   "icons": [
     {

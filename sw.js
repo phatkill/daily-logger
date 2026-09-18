@@ -1,4 +1,4 @@
-const CACHE_NAME = 'daily-logger-v1';
+const CACHE_NAME = 'daily-logger-v2';
 const ASSETS = [
   './',
   './index.html',
@@ -10,6 +10,7 @@ const ASSETS = [
 ];
 
 self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then(async (cache) => {
       for (const asset of ASSETS) {
@@ -19,7 +20,7 @@ self.addEventListener('install', (event) => {
           console.warn('Cache asset error:', asset, e);
         }
       }
-    }).then(() => self.skipWaiting())
+    })
   );
 });
 
@@ -38,10 +39,26 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  if (event.request.mode === 'navigate' || (event.request.headers.get('accept') && event.request.headers.get('accept').includes('text/html'))) {
+    event.respondWith(
+      fetch(event.request)
+        .then((networkResponse) => {
+          const resClone = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, resClone));
+          return networkResponse;
+        })
+        .catch(() => caches.match('./index.html') || caches.match(event.request))
+    );
+    return;
+  }
+
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request).catch(() => {
-        return caches.match('./index.html');
+    caches.match(event.request).then((cachedResponse) => {
+      if (cachedResponse) return cachedResponse;
+      return fetch(event.request).then((networkResponse) => {
+        const resClone = networkResponse.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, resClone));
+        return networkResponse;
       });
     })
   );

@@ -163,23 +163,28 @@
     /* Quick Stats Glancer (Today summary strip) */
     .glance-strip {
       background: var(--card-bg);
-      border-radius: 16px;
-      padding: 10px 14px;
-      margin-bottom: 16px;
+      border-radius: 14px;
+      padding: 8px 12px;
+      margin-bottom: 10px;
       box-shadow: var(--shadow-card);
       display: flex;
       align-items: center;
       justify-content: space-between;
       overflow-x: auto;
-      gap: 12px;
+      gap: 10px;
       white-space: nowrap;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .glance-strip::-webkit-scrollbar {
+      display: none;
     }
 
     .glance-item {
       display: flex;
       align-items: center;
-      gap: 6px;
-      font-size: 13px;
+      gap: 5px;
+      font-size: 12px;
       font-weight: 600;
       color: #374151;
     }
@@ -188,25 +193,25 @@
       color: var(--tint-primary);
       font-weight: 800;
       background: var(--tint-primary-light);
-      padding: 1px 7px;
-      border-radius: 8px;
+      padding: 1px 6px;
+      border-radius: 6px;
     }
 
     /* Search Box & Category Scroll Bar */
     .search-category-wrapper {
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
     }
 
     .search-box {
       background: var(--card-bg);
-      border-radius: 14px;
-      padding: 10px 14px;
+      border-radius: 12px;
+      padding: 8px 12px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       box-shadow: var(--shadow-card);
       border: 1px solid rgba(0,0,0,0.04);
     }
@@ -220,7 +225,7 @@
       border: none;
       background: transparent;
       outline: none;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
       color: var(--text-main);
       width: 100%;
@@ -229,10 +234,11 @@
 
     .category-scroll-bar {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       overflow-x: auto;
-      padding-bottom: 4px;
+      padding-bottom: 2px;
       scrollbar-width: none;
+      -ms-overflow-style: none;
     }
     .category-scroll-bar::-webkit-scrollbar {
       display: none;
@@ -241,13 +247,13 @@
     .cat-chip {
       background: var(--card-bg);
       color: var(--text-sub);
-      border-radius: 20px;
-      padding: 7px 14px;
-      font-size: 12.5px;
+      border-radius: 16px;
+      padding: 5px 11px;
+      font-size: 12px;
       font-weight: 700;
       white-space: nowrap;
       cursor: pointer;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
       border: 1px solid var(--border-color);
       transition: all 0.15s ease;
     }
@@ -256,29 +262,29 @@
       background: var(--tint-primary);
       color: #FFFFFF;
       border-color: var(--tint-primary);
-      box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3);
+      box-shadow: 0 2px 6px rgba(0, 122, 255, 0.3);
     }
 
     /* 4-column Activity Grid optimized for 6.67" Redmi Turbo 4 */
     .activity-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
+      gap: 8px;
     }
 
     .activity-card {
       background: var(--card-bg);
-      border-radius: var(--radius-card);
-      padding: 14px 4px 10px 4px;
+      border-radius: 16px;
+      padding: 10px 4px 8px 4px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       position: relative;
-      box-shadow: var(--shadow-card);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
       cursor: pointer;
-      border: 1px solid rgba(0, 0, 0, 0.04);
-      min-height: 94px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      min-height: 84px;
       transition: transform 0.1s cubic-bezier(0.2, 0.9, 0.4, 1.2), background 0.12s;
     }
 
@@ -288,22 +294,27 @@
     }
 
     .activity-emoji {
-      font-size: 34px;
-      line-height: 1.15;
-      margin-bottom: 6px;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.06));
+      font-size: 28px;
+      line-height: 1.1;
+      margin-bottom: 4px;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.06));
     }
 
+    /* Tối ưu hiển thị chữ 2 dòng, không bao giờ bị cắt thành 'nh...', 'deadl...' */
     .activity-label {
-      font-size: 12.5px;
+      font-size: 11px;
       font-weight: 600;
       color: #1F2937;
       text-align: center;
-      line-height: 1.25;
-      max-width: 96%;
+      line-height: 1.2;
+      width: 100%;
+      height: 26px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
       overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      word-break: break-word;
+      padding: 0 2px;
     }
 
     /* Count badge on card */
@@ -714,6 +725,92 @@
       background: var(--card-active);
     }
 
+    /* PWA Guide Banner */
+    .pwa-guide-bar {
+      background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+      border: 1px solid #BFDBFE;
+      border-radius: 14px;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 2px 8px rgba(0, 122, 255, 0.08);
+      cursor: pointer;
+    }
+    .btn-install-chip {
+      background: var(--tint-primary);
+      color: #FFFFFF;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(0, 122, 255, 0.3);
+      cursor: pointer;
+    }
+
+    /* Sound options */
+    .sound-option-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .sound-option-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: var(--bg-color);
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.15s;
+    }
+    .sound-option-row.active {
+      border-color: var(--tint-primary);
+      background: var(--tint-primary-light);
+    }
+    .sound-option-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .sound-icon {
+      font-size: 26px;
+      width: 32px;
+      text-align: center;
+    }
+    .sound-name {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .sound-badge-rec {
+      font-size: 10.5px;
+      padding: 1px 6px;
+      background: #10B981;
+      color: #FFFFFF;
+      border-radius: 6px;
+      font-weight: 800;
+    }
+    .sound-sub {
+      font-size: 12px;
+      color: var(--text-sub);
+      margin-top: 2px;
+    }
+    .sound-check {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--tint-primary);
+      width: 20px;
+      text-align: right;
+    }
+
     /* Bottom Sheets / Modals */
     .modal-overlay {
       position: fixed;
@@ -922,6 +1019,7 @@
             </div>
           </div>
           <div class="header-actions">
+            <button class="btn-circle" id="btnSoundTheme" onclick="openSoundThemeModal()" title="Âm thanh bấm nút (ASMR)" style="font-size: 18px;">🫧</button>
             <button class="btn-circle" onclick="showInstallModal()" title="Cài đặt App" style="color: var(--tint-primary);">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -931,6 +1029,16 @@
             </button>
             <button class="btn-circle" onclick="openAddModal()" title="Thêm nút mới">+</button>
           </div>
+        </div>
+
+        <!-- PWA Install Guide Banner (Shown when running inside browser, automatically hidden when running as standalone app) -->
+        <div class="pwa-guide-bar" id="pwaGuideBar" onclick="triggerPwaInstall()">
+          <div style="font-size: 24px;">📲</div>
+          <div style="flex: 1;">
+            <div style="font-weight: 800; font-size: 13px; color: #1E3A8A; line-height: 1.25;">Cài App để mất thanh link ở dưới màn hình</div>
+            <div style="font-size: 11px; color: #2563EB; margin-top: 2px;">Bấm nút <strong>[Install]</strong> ở đầu màn hình hoặc bấm vào đây</div>
+          </div>
+          <button class="btn-install-chip" type="button">Cài ngay</button>
         </div>
 
         <!-- Quick Glance Summary Bar -->
@@ -1173,26 +1281,129 @@
     <div class="modal-overlay" id="modalInstall" onclick="closeModalOnOverlay(event, 'modalInstall')">
       <div class="bottom-sheet">
         <div class="sheet-handle"></div>
-        <div class="sheet-title">Cài đặt App trên Redmi Turbo 4</div>
+        <div class="sheet-title">Cài đặt App vào máy Redmi Turbo 4</div>
         <div style="font-size: 14px; line-height: 1.6; color: #374151; margin-bottom: 16px;">
           
-          <div style="background: #F0FDF4; border: 1px solid #BBF7D0; padding: 12px; border-radius: 12px; margin-bottom: 14px;">
-            <strong style="color: #166534;">🌟 Cách 1: Tải file App Offline về máy (Khuyên dùng)</strong>
-            <p style="margin-top: 4px; color: #15803D;">Bấm nút xanh bên dưới để tải thẳng file app về máy. Sau đó mở file là dùng độc lập vĩnh viễn, không cần bật máy tính!</p>
+          <button class="sheet-btn sheet-btn-primary" onclick="triggerPwaInstall()" style="margin-bottom: 12px; font-size: 15px;">
+            📲 Bấm vào đây để Cài đặt App ngay
+          </button>
+
+          <div style="background: #FEF3C7; border: 1px solid #FDE68A; padding: 12px; border-radius: 12px; margin-bottom: 12px;">
+            <strong style="color: #92400E;">🎯 Làm sao để mất thanh link trình duyệt ở dưới?</strong>
+            <p style="margin-top: 4px; color: #78350F; font-size: 13px;">
+              Hiện tại bạn đang xem trong Chrome nên có thanh link <code>phatkill.github.io</code> ở dưới. Khi bạn cài thành App, bấm vào icon trên màn hình chính thì <strong>thanh link ở dưới sẽ biến mất 100%</strong>, chạy toàn màn hình độc lập!
+            </p>
           </div>
 
-          <div style="background: #EFF6FF; border: 1px solid #BFDBFE; padding: 12px; border-radius: 12px; margin-bottom: 14px;">
-            <strong style="color: #1E40AF;">📱 Cách 2: Tạo icon ứng dụng trên màn hình chính</strong>
-            <p style="margin-top: 4px;"><strong>Trình duyệt Mi (Có sẵn trên Redmi):</strong> Mở link bằng Trình duyệt Mi ➔ Bấm Menu ➔ Chọn <strong>"Thêm vào màn hình chính"</strong>.</p>
-            <p style="margin-top: 4px;"><strong>Trình duyệt Chrome:</strong> Bấm menu 3 chấm (⋮) ➔ Chọn <strong>"Thêm vào màn hình chính"</strong>.</p>
+          <div style="background: #EFF6FF; border: 1px solid #BFDBFE; padding: 12px; border-radius: 12px; margin-bottom: 12px;">
+            <strong style="color: #1E40AF;">👉 Hướng dẫn 2 bước cực nhanh:</strong>
+            <ol style="margin-top: 6px; padding-left: 18px; font-size: 13px; color: #1E3A8A; line-height: 1.5;">
+              <li style="margin-bottom: 6px;">Nhìn lên <strong>đầu màn hình Chrome</strong>: Có thanh thông báo màu trắng <em>"Install Daily Logger..."</em>, bấm nút chữ xanh <strong>[Install]</strong>.</li>
+              <li style="margin-bottom: 6px;">Hoặc bấm biểu tượng <strong>3 chấm (⋮)</strong> ở góc Chrome ➔ chọn <strong>"Cài đặt ứng dụng"</strong> (hoặc <em>"Thêm vào màn hình chính"</em>).</li>
+              <li>Sau đó mở icon <strong>Daily Logger</strong> ngoài màn hình chính để dùng vĩnh viễn, không cần bật máy tính!</li>
+            </ol>
           </div>
 
+          <div style="background: #F0FDF4; border: 1px solid #BBF7D0; padding: 12px; border-radius: 12px; margin-bottom: 6px;">
+            <strong style="color: #166534;">💾 Hoặc tải file App Offline (.html):</strong>
+            <p style="margin-top: 4px; color: #15803D; font-size: 12.5px;">Bấm nút xanh dưới để tải file HTML về máy, mở xem offline bất kỳ lúc nào.</p>
+          </div>
         </div>
 
         <button class="sheet-btn sheet-btn-success" onclick="downloadSingleFileApp()">
-          ⬇️ Tải file App Offline về Redmi Turbo 4
+          ⬇️ Tải file App Offline (.html) về Redmi
         </button>
         <button class="sheet-btn sheet-btn-secondary" onclick="closeModal('modalInstall')">Đã hiểu</button>
+      </div>
+    </div>
+
+    <!-- MODAL 4: ASMR SOUND PICKER -->
+    <div class="modal-overlay" id="modalSoundTheme" onclick="closeModalOnOverlay(event, 'modalSoundTheme')">
+      <div class="bottom-sheet">
+        <div class="sheet-handle"></div>
+        <div class="sheet-title">Âm thanh bấm nút (ASMR)</div>
+        <div style="font-size: 13px; color: var(--text-sub); margin-bottom: 12px;">Chọn kiểu âm thanh chạm cực sướng tai mỗi khi ghi nhận:</div>
+
+        <div class="sound-option-list">
+          <div class="sound-option-row" onclick="selectSoundTheme('bubble')">
+            <div class="sound-option-info">
+              <span class="sound-icon">🫧</span>
+              <div>
+                <div class="sound-name">Bong bóng (Bubble Pop) <span class="sound-badge-rec">Đã tai</span></div>
+                <div class="sound-sub">Tiếng bụp giòn tan, nẩy, êm tai, cực kỳ sướng tay</div>
+              </div>
+            </div>
+            <span class="sound-check" id="check-bubble">✓</span>
+          </div>
+
+          <div class="sound-option-row" onclick="selectSoundTheme('thock')">
+            <div class="sound-option-info">
+              <span class="sound-icon">⌨️</span>
+              <div>
+                <div class="sound-name">Phím cơ (Mechanical Thock)</div>
+                <div class="sound-sub">Âm thock đầm ấm như gõ switch bàn phím cơ</div>
+              </div>
+            </div>
+            <span class="sound-check" id="check-thock"></span>
+          </div>
+
+          <div class="sound-option-row" onclick="selectSoundTheme('water')">
+            <div class="sound-option-info">
+              <span class="sound-icon">💧</span>
+              <div>
+                <div class="sound-name">Giọt nước (Water Droplet)</div>
+                <div class="sound-sub">Tiếng tách nước trong trẻo, thư giãn nhẹ nhàng</div>
+              </div>
+            </div>
+            <span class="sound-check" id="check-water"></span>
+          </div>
+
+          <div class="sound-option-row" onclick="selectSoundTheme('wood')">
+            <div class="sound-option-info">
+              <span class="sound-icon">🪵</span>
+              <div>
+                <div class="sound-name">Cốc gỗ (Wood Knock)</div>
+                <div class="sound-sub">Tiếng gõ khối gỗ tự nhiên mộc mạc, đậm chất zen</div>
+              </div>
+            </div>
+            <span class="sound-check" id="check-wood"></span>
+          </div>
+
+          <div class="sound-option-row" onclick="selectSoundTheme('marimba')">
+            <div class="sound-option-info">
+              <span class="sound-icon">🎵</span>
+              <div>
+                <div class="sound-name">Chuông ngũ cung (Marimba Chime)</div>
+                <div class="sound-sub">Tự động phát giai điệu ngũ cung du dương khi bấm liên tục</div>
+              </div>
+            </div>
+            <span class="sound-check" id="check-marimba"></span>
+          </div>
+
+          <div class="sound-option-row" onclick="selectSoundTheme('pop')">
+            <div class="sound-option-info">
+              <span class="sound-icon">🔘</span>
+              <div>
+                <div class="sound-name">Pop nhẹ nhàng (Soft Pop)</div>
+                <div class="sound-sub">Tiếng click thanh mảnh tối giản</div>
+              </div>
+            </div>
+            <span class="sound-check" id="check-pop"></span>
+          </div>
+
+          <div class="sound-option-row" onclick="selectSoundTheme('mute')">
+            <div class="sound-option-info">
+              <span class="sound-icon">🔇</span>
+              <div>
+                <div class="sound-name">Tắt âm thanh</div>
+                <div class="sound-sub">Chỉ rung phản hồi xúc giác (Haptic)</div>
+              </div>
+            </div>
+            <span class="sound-check" id="check-mute"></span>
+          </div>
+        </div>
+
+        <button class="sheet-btn sheet-btn-secondary" onclick="closeModal('modalSoundTheme')" style="margin-top: 12px;">Đóng</button>
       </div>
     </div>
 
@@ -1350,37 +1561,224 @@
       return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
     }
 
-    // --- 3. HAPTIC & AUDIO FEEDBACK TỐI ƯU CHO REDMI TURBO 4 ---
+    // --- 3. HAPTIC & ASMR AUDIO ENGINE TỐI ƯU CHO REDMI TURBO 4 ---
     let audioCtx = null;
-    function playTapSound() {
+    let currentSoundTheme = localStorage.getItem('daily_logger_sound_theme') || 'bubble';
+    let marimbaScaleStep = 0;
+
+    const SOUND_ICONS = {
+      bubble: '🫧',
+      thock: '⌨️',
+      water: '💧',
+      wood: '🪵',
+      marimba: '🎵',
+      pop: '🔘',
+      mute: '🔇'
+    };
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioCtxClass) {
+          audioCtx = new AudioCtxClass();
+        }
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume().catch(() => {});
+      }
+      return audioCtx;
+    }
+
+    // Tự động kích hoạt Web Audio ngay khi người dùng chạm màn hình lần đầu
+    ['touchstart', 'touchend', 'click', 'pointerdown'].forEach(evName => {
+      window.addEventListener(evName, () => {
+        getAudioContext();
+      }, { passive: true, capture: true });
+    });
+
+    function playAsmrSound(theme = currentSoundTheme) {
+      if (theme === 'mute') return;
       try {
-        if (!audioCtx) {
-          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        }
-        if (audioCtx.state === 'suspended') {
-          audioCtx.resume();
-        }
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(620, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(120, audioCtx.currentTime + 0.08);
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
 
-        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+        if (theme === 'bubble') {
+          // 1. Bubble Pop: Tiếng bụp bong bóng nẩy giòn, cực đã tai
+          const baseFreq = 780 + (Math.random() * 80 - 40);
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
 
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.09);
-      } catch (e) {}
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(baseFreq, now);
+          osc.frequency.exponentialRampToValueAtTime(140, now + 0.055);
+
+          gain.gain.setValueAtTime(0.42, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.055);
+
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.06);
+
+          // Transient micro-click
+          const click = ctx.createOscillator();
+          const clickGain = ctx.createGain();
+          click.type = 'triangle';
+          click.frequency.setValueAtTime(1500, now);
+          click.frequency.exponentialRampToValueAtTime(350, now + 0.012);
+          clickGain.gain.setValueAtTime(0.2, now);
+          clickGain.gain.exponentialRampToValueAtTime(0.001, now + 0.012);
+          click.connect(clickGain);
+          clickGain.connect(ctx.destination);
+          click.start(now);
+          click.stop(now + 0.015);
+        }
+        else if (theme === 'thock') {
+          // 2. Mechanical Switch Thock: Tiếng gõ phím cơ đầm ấm
+          const highOsc = ctx.createOscillator();
+          const highGain = ctx.createGain();
+          highOsc.type = 'triangle';
+          highOsc.frequency.setValueAtTime(1350 + Math.random() * 100, now);
+          highOsc.frequency.exponentialRampToValueAtTime(280, now + 0.018);
+          highGain.gain.setValueAtTime(0.3, now);
+          highGain.gain.exponentialRampToValueAtTime(0.001, now + 0.018);
+          highOsc.connect(highGain);
+          highGain.connect(ctx.destination);
+          highOsc.start(now);
+          highOsc.stop(now + 0.02);
+
+          const lowOsc = ctx.createOscillator();
+          const lowGain = ctx.createGain();
+          lowOsc.type = 'sine';
+          lowOsc.frequency.setValueAtTime(185, now);
+          lowOsc.frequency.exponentialRampToValueAtTime(65, now + 0.05);
+          lowGain.gain.setValueAtTime(0.48, now);
+          lowGain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+          lowOsc.connect(lowGain);
+          lowGain.connect(ctx.destination);
+          lowOsc.start(now);
+          lowOsc.stop(now + 0.055);
+        }
+        else if (theme === 'water') {
+          // 3. Water Droplet: Tiếng tách nước trong veo thư giãn
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          const pitch = 880 + (Math.random() * 60 - 30);
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(pitch, now);
+          osc.frequency.exponentialRampToValueAtTime(pitch * 1.9, now + 0.035);
+          osc.frequency.exponentialRampToValueAtTime(pitch * 1.3, now + 0.08);
+
+          gain.gain.setValueAtTime(0.36, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.09);
+        }
+        else if (theme === 'wood') {
+          // 4. Wood Knock: Cốc gỗ gõ tự nhiên, thanh tao
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          const base = 520 + (Math.random() * 40 - 20);
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(base, now);
+          osc.frequency.exponentialRampToValueAtTime(160, now + 0.04);
+
+          gain.gain.setValueAtTime(0.5, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.045);
+        }
+        else if (theme === 'marimba') {
+          // 5. Marimba / Chime: Chuông ngũ cung phát giai điệu khi bấm liên tục
+          const notes = [523.25, 587.33, 659.25, 783.99, 880.00, 1046.50];
+          const freq = notes[marimbaScaleStep % notes.length];
+          marimbaScaleStep++;
+
+          const osc = ctx.createOscillator();
+          const osc2 = ctx.createOscillator();
+          const gain = ctx.createGain();
+
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now);
+          osc2.type = 'triangle';
+          osc2.frequency.setValueAtTime(freq * 2, now);
+
+          gain.gain.setValueAtTime(0.32, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.13);
+
+          osc.connect(gain);
+          osc2.connect(gain);
+          gain.connect(ctx.destination);
+
+          osc.start(now);
+          osc2.start(now);
+          osc.stop(now + 0.14);
+          osc2.stop(now + 0.14);
+        }
+        else {
+          // 6. Pop cổ điển
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(640, now);
+          osc.frequency.exponentialRampToValueAtTime(160, now + 0.05);
+          gain.gain.setValueAtTime(0.32, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.06);
+        }
+      } catch (e) {
+        console.warn('ASMR Audio error:', e);
+      }
+    }
+
+    function openSoundThemeModal() {
+      updateSoundThemeUI();
+      document.getElementById('modalSoundTheme').classList.add('active');
+    }
+
+    function updateSoundThemeUI() {
+      const btn = document.getElementById('btnSoundTheme');
+      if (btn) btn.textContent = SOUND_ICONS[currentSoundTheme] || '🔊';
+
+      document.querySelectorAll('.sound-option-row').forEach(row => {
+        row.classList.remove('active');
+      });
+      document.querySelectorAll('.sound-check').forEach(chk => {
+        chk.textContent = '';
+      });
+
+      const activeRow = document.querySelector(`.sound-option-row[onclick*="'${currentSoundTheme}'"]`);
+      if (activeRow) {
+        activeRow.classList.add('active');
+        const chk = document.getElementById(`check-${currentSoundTheme}`);
+        if (chk) chk.textContent = '✓';
+      }
+    }
+
+    function selectSoundTheme(theme) {
+      currentSoundTheme = theme;
+      localStorage.setItem('daily_logger_sound_theme', theme);
+      updateSoundThemeUI();
+      playAsmrSound(theme);
+      triggerHaptic();
+      showToast(`Đã chọn âm: ${SOUND_ICONS[theme] || ''} ${theme === 'mute' ? 'Tắt tiếng' : theme.toUpperCase()}`);
     }
 
     function triggerHaptic() {
       if (navigator.vibrate) {
         try {
-          // X-axis linear motor on Redmi Turbo 4 gives a solid 28ms pop
-          navigator.vibrate(28);
+          // Motor rung trục X của Redmi Turbo 4 phản hồi 22ms siêu nẩy
+          navigator.vibrate(22);
         } catch (e) {}
       }
     }
@@ -1458,9 +1856,18 @@
 
         let pressTimer = null;
         let isLongPress = false;
+        let startX = 0;
+        let startY = 0;
+        let isTouchMoved = false;
+        let lastTouchEndTime = 0;
 
         function startPress(e) {
           isLongPress = false;
+          isTouchMoved = false;
+          if (e.touches && e.touches[0]) {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+          }
           pressTimer = setTimeout(() => {
             isLongPress = true;
             triggerHaptic();
@@ -1468,21 +1875,41 @@
           }, 450);
         }
 
+        function movePress(e) {
+          if (e.touches && e.touches[0]) {
+            const dx = e.touches[0].clientX - startX;
+            const dy = e.touches[0].clientY - startY;
+            if (Math.hypot(dx, dy) > 10) {
+              isTouchMoved = true;
+              if (pressTimer) clearTimeout(pressTimer);
+            }
+          }
+        }
+
         function cancelPress() {
           if (pressTimer) clearTimeout(pressTimer);
         }
 
-        function handleCardClick(e) {
+        function handleCardTouchEnd(e) {
           cancelPress();
+          lastTouchEndTime = Date.now();
+          if (isTouchMoved || isLongPress) return;
+          logActivity(act, card, e);
+        }
+
+        function handleCardMouseUp(e) {
+          cancelPress();
+          if (Date.now() - lastTouchEndTime < 600) return;
           if (isLongPress) return;
           logActivity(act, card, e);
         }
 
         card.addEventListener('touchstart', startPress, { passive: true });
-        card.addEventListener('touchend', handleCardClick);
+        card.addEventListener('touchmove', movePress, { passive: true });
+        card.addEventListener('touchend', handleCardTouchEnd);
         card.addEventListener('touchcancel', cancelPress);
         card.addEventListener('mousedown', startPress);
-        card.addEventListener('mouseup', handleCardClick);
+        card.addEventListener('mouseup', handleCardMouseUp);
         card.addEventListener('mouseleave', cancelPress);
 
         grid.appendChild(card);
@@ -1491,7 +1918,7 @@
 
     // --- 5. LOG ACTIVITY (1-TAP) ---
     function logActivity(activity, cardEl, event) {
-      playTapSound();
+      playAsmrSound();
       triggerHaptic();
 
       const newLog = {
@@ -2140,14 +2567,57 @@
       }, 1500);
     }
 
-    // --- 13. INITIALIZATION ---
+    // --- 13. PWA INSTALL & STANDALONE SUPPORT ---
+    let deferredPrompt = null;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      const guideBar = document.getElementById('pwaGuideBar');
+      if (guideBar && !isAppStandalone()) {
+        guideBar.style.display = 'flex';
+      }
+    });
+
+    function isAppStandalone() {
+      return window.matchMedia('(display-mode: standalone)').matches || 
+             window.navigator.standalone === true ||
+             document.referrer.includes('android-app://');
+    }
+
+    function triggerPwaInstall() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            showToast('🎉 Đang cài đặt App vào Redmi Turbo 4...');
+            const guideBar = document.getElementById('pwaGuideBar');
+            if (guideBar) guideBar.style.display = 'none';
+          }
+          deferredPrompt = null;
+        });
+      } else {
+        // Hướng dẫn người dùng bấm nút [Install] hoặc menu 3 chấm của Chrome
+        showInstallModal();
+      }
+    }
+
+    // --- 14. INITIALIZATION ---
     window.addEventListener('DOMContentLoaded', () => {
       initData();
       renderGrid();
+      updateSoundThemeUI();
       document.getElementById('currentDateBadge').textContent = `📅 ` + getFormattedDateVN(new Date());
 
+      // Ẩn banner hướng dẫn cài đặt nếu đã mở từ màn hình chính (Standalone)
+      if (isAppStandalone()) {
+        const guideBar = document.getElementById('pwaGuideBar');
+        if (guideBar) guideBar.style.display = 'none';
+      }
+
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js').catch(() => {});
+        navigator.serviceWorker.register('./sw.js').then(reg => {
+          reg.update();
+        }).catch(() => {});
       }
     });
   </script>
