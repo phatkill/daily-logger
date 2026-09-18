@@ -1,4 +1,4 @@
-const CACHE_NAME = 'daily-logger-v2';
+const CACHE_NAME = 'daily-logger-v3';
 const ASSETS = [
   './',
   './index.html',
