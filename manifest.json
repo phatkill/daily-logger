@@ -1,0 +1,24 @@
+{
+  "name": "Daily Logger - Nhật ký 1 chạm",
+  "short_name": "DailyLogger",
+  "description": "Bấm 1 nút ghi lại mọi việc trong ngày - Nhanh gọn, không cần điền form",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F2F2F7",
+  "theme_color": "#F2F2F7",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
