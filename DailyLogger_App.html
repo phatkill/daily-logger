@@ -209,72 +209,261 @@
       border-radius: 6px;
     }
 
-    /* Search Box & Category Scroll Bar */
-    .search-category-wrapper {
-      margin-bottom: 12px;
+    /* CATEGORY & FEATURES DROPDOWN SYSTEM ("SỔ RA CỰC PHÊ") */
+    .popover-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      z-index: 105;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .popover-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Menu Chức năng button */
+    .btn-features-menu {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #FFFFFF;
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      padding: 7px 12px;
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      cursor: pointer;
+      transition: transform 0.12s, background 0.12s;
+    }
+    .btn-features-menu:active {
+      transform: scale(0.95);
+      background: var(--card-active);
+    }
+    .features-arrow {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Category Selector Wrapper & Row */
+    .category-selector-wrapper {
+      position: relative;
+      margin-bottom: 8px;
+      z-index: 110;
+    }
+
+    .category-selector-row {
       display: flex;
-      flex-direction: column;
+      align-items: center;
       gap: 8px;
+    }
+
+    .category-dropdown-trigger {
+      flex: 1;
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 9px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+      cursor: pointer;
+      transition: transform 0.12s, border-color 0.15s;
+    }
+    .category-dropdown-trigger:active {
+      transform: scale(0.98);
+      border-color: var(--tint-primary);
+    }
+
+    .cat-current-icon {
+      font-size: 20px;
+      line-height: 1;
+    }
+    .cat-current-label {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-main);
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .cat-current-count {
+      font-size: 11px;
+      font-weight: 800;
+      background: var(--tint-primary-light);
+      color: var(--tint-primary);
+      padding: 2px 7px;
+      border-radius: 8px;
+    }
+    .cat-arrow-icon {
+      color: var(--text-sub);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .category-dropdown-trigger.open .cat-arrow-icon {
+      transform: rotate(180deg);
+      color: var(--tint-primary);
+    }
+
+    .btn-search-toggle {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-main);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+      transition: transform 0.12s, background 0.12s;
+    }
+    .btn-search-toggle:active {
+      transform: scale(0.92);
+      background: var(--card-active);
+    }
+
+    /* Expandable Search Input */
+    .expandable-search-box {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s, margin-bottom 0.2s;
+      margin-bottom: 0;
+    }
+    .expandable-search-box.open {
+      max-height: 52px;
+      opacity: 1;
+      margin-bottom: 8px;
     }
 
     .search-box {
       background: var(--card-bg);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 8px 12px;
       display: flex;
       align-items: center;
       gap: 8px;
       box-shadow: var(--shadow-card);
-      border: 1px solid rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.05);
     }
-
     .search-box svg {
       color: var(--text-sub);
       flex-shrink: 0;
     }
-
     .search-box input {
       border: none;
       background: transparent;
       outline: none;
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 500;
       color: var(--text-main);
       width: 100%;
       font-family: inherit;
     }
 
-    .category-scroll-bar {
+    /* DROPDOWN MENUS (SỔ RA CỰC MƯỢT VỚI BLUR PHÊ MẮT) */
+    .dropdown-popover {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border-radius: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.16), 0 2px 8px rgba(0, 0, 0, 0.04);
+      padding: 6px;
+      z-index: 120;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.94) translateY(-10px);
+      transform-origin: top center;
+      transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  visibility 0.22s;
+    }
+    .dropdown-popover.open {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1) translateY(0);
+    }
+
+    /* Category Popover positioning */
+    .category-popover {
+      top: calc(100% + 6px);
+      left: 0;
+      right: 0;
       display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      padding-bottom: 2px;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-    .category-scroll-bar::-webkit-scrollbar {
-      display: none;
+      flex-direction: column;
+      gap: 3px;
     }
 
-    .cat-chip {
-      background: var(--card-bg);
-      color: var(--text-sub);
-      border-radius: 16px;
-      padding: 5px 11px;
-      font-size: 12px;
-      font-weight: 700;
-      white-space: nowrap;
+    /* Features Popover positioning */
+    .features-popover {
+      top: 48px;
+      right: 14px;
+      width: 260px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .dropdown-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 14px;
       cursor: pointer;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-      border: 1px solid var(--border-color);
-      transition: all 0.15s ease;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1F2937;
+      transition: background 0.12s, transform 0.08s;
     }
-
-    .cat-chip.active {
+    .dropdown-menu-item:active {
+      background: var(--tint-primary-light);
+      transform: scale(0.98);
+    }
+    .dropdown-menu-item.active {
+      background: var(--tint-primary-light);
+      color: var(--tint-primary);
+      font-weight: 700;
+    }
+    .dropdown-item-icon {
+      font-size: 20px;
+      width: 24px;
+      text-align: center;
+      line-height: 1;
+    }
+    .dropdown-item-label {
+      flex: 1;
+    }
+    .dropdown-item-badge {
+      font-size: 11px;
+      font-weight: 800;
+      background: #F3F4F6;
+      color: #4B5563;
+      padding: 2px 7px;
+      border-radius: 8px;
+    }
+    .dropdown-menu-item.active .dropdown-item-badge {
       background: var(--tint-primary);
       color: #FFFFFF;
-      border-color: var(--tint-primary);
-      box-shadow: 0 2px 6px rgba(0, 122, 255, 0.3);
+    }
+
+    .dropdown-menu-divider {
+      height: 1px;
+      background: rgba(0, 0, 0, 0.06);
+      margin: 4px 6px;
     }
 
     /* 3-column Activity Grid (3 CỤC / 3 CỘT RỘNG RÃI THEO YÊU CẦU) */
@@ -1027,7 +1216,11 @@
       <!-- TAB 1: GHI NHẬN (LOG GRID) -->
       <div class="tab-view active" id="tabGhiNhan">
         
-        <div class="header-section">
+        <!-- Backdrop để đóng menu khi chạm ra ngoài màn hình -->
+        <div class="popover-backdrop" id="popoverBackdrop" onclick="closeAllMenus()"></div>
+
+        <!-- Top Header -->
+        <div class="header-section" style="position: relative;">
           <div>
             <div class="header-date-badge" id="currentDateBadge">📅 Hôm nay</div>
             <div class="header-main-title">
@@ -1036,26 +1229,119 @@
             </div>
           </div>
           <div class="header-actions">
-            <button class="btn-circle" id="btnSoundTheme" onclick="openSoundThemeModal()" title="Âm thanh bấm nút (ASMR)" style="font-size: 18px;">🫧</button>
-            <button class="btn-circle" onclick="showInstallModal()" title="Cài đặt App" style="color: var(--tint-primary);">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="7 10 12 15 17 10"/>
-                <line x1="12" y1="15" x2="12" y2="3"/>
-              </svg>
+            <button class="btn-circle" id="btnSoundTheme" onclick="openSoundThemeModal()" title="Âm thanh bấm nút (ASMR)">🫧</button>
+            <button class="btn-features-menu" onclick="toggleFeaturesMenu(event)" title="Menu Chức năng">
+              <span>⚡ Chức năng</span>
+              <svg class="features-arrow" id="featuresArrowIcon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
-            <button class="btn-circle" onclick="openAddModal()" title="Thêm nút mới">+</button>
+          </div>
+
+          <!-- POPUP SỔ RA: MENU CHỨC NĂNG (FEATURES DROPDOWN) -->
+          <div class="dropdown-popover features-popover" id="featuresDropdownMenu">
+            <div class="dropdown-menu-item" onclick="openAddModal(); closeAllMenus();">
+              <span class="dropdown-item-icon">➕</span>
+              <span class="dropdown-item-label">Thêm hoạt động mới</span>
+            </div>
+            <div class="dropdown-menu-item" onclick="openSoundThemeModal(); closeAllMenus();">
+              <span class="dropdown-item-icon">🫧</span>
+              <span class="dropdown-item-label">Đổi kiểu âm thanh ASMR</span>
+            </div>
+            <div class="dropdown-menu-item" onclick="showInstallModal(); closeAllMenus();">
+              <span class="dropdown-item-icon">📲</span>
+              <span class="dropdown-item-label">Cài đặt App (Mất thanh link)</span>
+            </div>
+            <div class="dropdown-menu-item" onclick="toggleSearchBox(); closeAllMenus();">
+              <span class="dropdown-item-icon">🔍</span>
+              <span class="dropdown-item-label">Tìm kiếm hoạt động</span>
+            </div>
+            <div class="dropdown-menu-divider"></div>
+            <div class="dropdown-menu-item" onclick="seedSampleData(); closeAllMenus();">
+              <span class="dropdown-item-icon">🎲</span>
+              <span class="dropdown-item-label">Nạp dữ liệu mẫu (Demo)</span>
+            </div>
+            <div class="dropdown-menu-item" onclick="exportDataCSV(); closeAllMenus();">
+              <span class="dropdown-item-icon">📑</span>
+              <span class="dropdown-item-label">Xuất file Excel / CSV</span>
+            </div>
           </div>
         </div>
 
         <!-- PWA Install Guide Banner (Shown when running inside browser, automatically hidden when running as standalone app) -->
         <div class="pwa-guide-bar" id="pwaGuideBar" onclick="triggerPwaInstall()">
-          <div style="font-size: 24px;">📲</div>
+          <div style="font-size: 22px;">📲</div>
           <div style="flex: 1;">
             <div style="font-weight: 800; font-size: 13px; color: #1E3A8A; line-height: 1.25;">Cài App để mất thanh link ở dưới màn hình</div>
-            <div style="font-size: 11px; color: #2563EB; margin-top: 2px;">Bấm nút <strong>[Install]</strong> ở đầu màn hình hoặc bấm vào đây</div>
+            <div style="font-size: 11px; color: #2563EB; margin-top: 1px;">Bấm nút <strong>[Install]</strong> ở đầu màn hình hoặc bấm vào đây</div>
           </div>
           <button class="btn-install-chip" type="button">Cài ngay</button>
+        </div>
+
+        <!-- CATEGORY SELECTOR ROW ("LỰA CHỌN SỔ RA CỰC PHÊ") -->
+        <div class="category-selector-wrapper">
+          <div class="category-selector-row">
+            <div class="category-dropdown-trigger" id="catDropdownTrigger" onclick="toggleCategoryMenu(event)">
+              <span class="cat-current-icon" id="catCurrentIcon">🌟</span>
+              <span class="cat-current-label" id="catCurrentLabel">Tất cả hoạt động</span>
+              <span class="cat-current-count" id="catCurrentCount">49</span>
+              <svg class="cat-arrow-icon" id="catArrowIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+            <button class="btn-search-toggle" onclick="toggleSearchBox()" title="Tìm nhanh">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </div>
+
+          <!-- POPUP SỔ RA: DANH MỤC LỰA CHỌN (CATEGORY DROPDOWN) -->
+          <div class="dropdown-popover category-popover" id="categoryDropdownMenu">
+            <div class="dropdown-menu-item active" id="catItem-all" onclick="selectCategoryMenu('all', '🌟', 'Tất cả hoạt động', 49)">
+              <span class="dropdown-item-icon">🌟</span>
+              <span class="dropdown-item-label">Tất cả hoạt động</span>
+              <span class="dropdown-item-badge">49</span>
+            </div>
+            <div class="dropdown-menu-item" id="catItem-study" onclick="selectCategoryMenu('study', '📚', 'Học tập & Thi cử', 8)">
+              <span class="dropdown-item-icon">📚</span>
+              <span class="dropdown-item-label">Học tập & Thi cử</span>
+              <span class="dropdown-item-badge">8</span>
+            </div>
+            <div class="dropdown-menu-item" id="catItem-work" onclick="selectCategoryMenu('work', '💼', 'Công việc & Nhóm', 8)">
+              <span class="dropdown-item-icon">💼</span>
+              <span class="dropdown-item-label">Công việc & Nhóm</span>
+              <span class="dropdown-item-badge">8</span>
+            </div>
+            <div class="dropdown-menu-item" id="catItem-social" onclick="selectCategoryMenu('social', '💬', 'Giao tiếp & Bạn bè', 6)">
+              <span class="dropdown-item-icon">💬</span>
+              <span class="dropdown-item-label">Giao tiếp & Bạn bè</span>
+              <span class="dropdown-item-badge">6</span>
+            </div>
+            <div class="dropdown-menu-item" id="catItem-routine" onclick="selectCategoryMenu('routine', '🏡', 'Sinh hoạt thường ngày', 12)">
+              <span class="dropdown-item-icon">🏡</span>
+              <span class="dropdown-item-label">Sinh hoạt thường ngày</span>
+              <span class="dropdown-item-badge">12</span>
+            </div>
+            <div class="dropdown-menu-item" id="catItem-health" onclick="selectCategoryMenu('health', '🏃', 'Sức khỏe & Thể chất', 7)">
+              <span class="dropdown-item-icon">🏃</span>
+              <span class="dropdown-item-label">Sức khỏe & Thể chất</span>
+              <span class="dropdown-item-badge">7</span>
+            </div>
+            <div class="dropdown-menu-item" id="catItem-relax" onclick="selectCategoryMenu('relax', '🎮', 'Giải trí & Cảm xúc', 8)">
+              <span class="dropdown-item-icon">🎮</span>
+              <span class="dropdown-item-label">Giải trí & Cảm xúc</span>
+              <span class="dropdown-item-badge">8</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ô TÌM KIẾM MỞ RỘNG (EXPANDABLE SEARCH BOX) -->
+        <div class="expandable-search-box" id="expandableSearchBox">
+          <div class="search-box">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="inputSearchActivity" placeholder="Tìm nhanh (học bài, làm đề, họp...)" oninput="filterActivities()">
+            <span onclick="clearSearch()" style="cursor: pointer; color: var(--text-sub); font-size: 16px; padding: 0 4px;">✕</span>
+          </div>
         </div>
 
         <!-- Quick Glance Summary Bar -->
@@ -1064,23 +1350,6 @@
           <div class="glance-item">📚 Học tập: <span class="count" id="glanceStudy">0</span></div>
           <div class="glance-item">💼 Công việc: <span class="count" id="glanceWork">0</span></div>
           <div class="glance-item">💬 Giao tiếp: <span class="count" id="glanceSocial">0</span></div>
-        </div>
-
-        <!-- Search Bar & Category Filter Bar -->
-        <div class="search-category-wrapper">
-          <div class="search-box">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" id="inputSearchActivity" placeholder="Tìm nhanh (học bài, làm đề, họp...)" oninput="filterActivities()">
-          </div>
-          <div class="category-scroll-bar" id="categoryScrollBar">
-            <div class="cat-chip active" onclick="setCategory('all', this)">🌟 Tất cả (49)</div>
-            <div class="cat-chip" onclick="setCategory('study', this)">📚 Học tập (8)</div>
-            <div class="cat-chip" onclick="setCategory('work', this)">💼 Công việc (8)</div>
-            <div class="cat-chip" onclick="setCategory('social', this)">💬 Giao tiếp (6)</div>
-            <div class="cat-chip" onclick="setCategory('routine', this)">🏡 Sinh hoạt (12)</div>
-            <div class="cat-chip" onclick="setCategory('health', this)">🏃 Sức khỏe (7)</div>
-            <div class="cat-chip" onclick="setCategory('relax', this)">🎮 Giải trí (8)</div>
-          </div>
         </div>
 
         <!-- 4-Column Activity Grid -->
@@ -1542,11 +1811,100 @@
       }
     }
 
-    function setCategory(cat, chipEl) {
+    function toggleCategoryMenu(e) {
+      if (e) e.stopPropagation();
+      const menu = document.getElementById('categoryDropdownMenu');
+      const trigger = document.getElementById('catDropdownTrigger');
+      const backdrop = document.getElementById('popoverBackdrop');
+      const isOpen = menu.classList.contains('open');
+
+      closeAllMenus();
+
+      if (!isOpen) {
+        playAsmrSound('bubble');
+        triggerHaptic();
+        menu.classList.add('open');
+        trigger.classList.add('open');
+        backdrop.classList.add('active');
+      }
+    }
+
+    function toggleFeaturesMenu(e) {
+      if (e) e.stopPropagation();
+      const menu = document.getElementById('featuresDropdownMenu');
+      const arrow = document.getElementById('featuresArrowIcon');
+      const backdrop = document.getElementById('popoverBackdrop');
+      const isOpen = menu.classList.contains('open');
+
+      closeAllMenus();
+
+      if (!isOpen) {
+        playAsmrSound('bubble');
+        triggerHaptic();
+        menu.classList.add('open');
+        if (arrow) arrow.style.transform = 'rotate(180deg)';
+        backdrop.classList.add('active');
+      }
+    }
+
+    function closeAllMenus() {
+      document.querySelectorAll('.dropdown-popover').forEach(m => m.classList.remove('open'));
+      document.querySelectorAll('.category-dropdown-trigger').forEach(t => t.classList.remove('open'));
+      const arrow = document.getElementById('featuresArrowIcon');
+      if (arrow) arrow.style.transform = 'rotate(0deg)';
+      const backdrop = document.getElementById('popoverBackdrop');
+      if (backdrop) backdrop.classList.remove('active');
+    }
+
+    function selectCategoryMenu(cat, icon, label, count) {
       currentCategory = cat;
-      document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
-      if (chipEl) chipEl.classList.add('active');
+      playAsmrSound('bubble');
+      triggerHaptic();
+
+      const iconEl = document.getElementById('catCurrentIcon');
+      const labelEl = document.getElementById('catCurrentLabel');
+      const countEl = document.getElementById('catCurrentCount');
+
+      if (iconEl) iconEl.textContent = icon;
+      if (labelEl) labelEl.textContent = label;
+      if (countEl) countEl.textContent = count;
+
+      document.querySelectorAll('#categoryDropdownMenu .dropdown-menu-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      const currentItem = document.getElementById(`catItem-${cat}`);
+      if (currentItem) currentItem.classList.add('active');
+
+      closeAllMenus();
       renderGrid();
+    }
+
+    function toggleSearchBox() {
+      const box = document.getElementById('expandableSearchBox');
+      const input = document.getElementById('inputSearchActivity');
+      const isOpen = box.classList.contains('open');
+
+      playAsmrSound('bubble');
+      triggerHaptic();
+
+      if (isOpen) {
+        box.classList.remove('open');
+        input.value = '';
+        currentSearchQuery = '';
+        renderGrid();
+      } else {
+        box.classList.add('open');
+        setTimeout(() => input.focus(), 150);
+      }
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('inputSearchActivity');
+      input.value = '';
+      currentSearchQuery = '';
+      renderGrid();
+      const box = document.getElementById('expandableSearchBox');
+      if (box) box.classList.remove('open');
     }
 
     function filterActivities() {
