@@ -172,41 +172,47 @@
       background: var(--card-active);
     }
 
-    /* Quick Stats Glancer (Today summary strip) */
+    /* Quick Stats Glancer - Cân đối 4 cột vừa khít 100% màn hình, không bao giờ bị cắt */
     .glance-strip {
       background: var(--card-bg);
       border-radius: 14px;
-      padding: 8px 12px;
+      padding: 6px 8px;
       margin-bottom: 10px;
-      box-shadow: var(--shadow-card);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      overflow-x: auto;
-      gap: 10px;
-      white-space: nowrap;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-    .glance-strip::-webkit-scrollbar {
-      display: none;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .glance-item {
       display: flex;
       align-items: center;
-      gap: 5px;
-      font-size: 12px;
-      font-weight: 600;
+      justify-content: center;
+      gap: 4px;
+      font-size: 11.5px;
+      font-weight: 700;
       color: #374151;
+      background: #F8FAFC;
+      padding: 6px 2px;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 0, 0, 0.03);
+      white-space: nowrap;
+      cursor: pointer;
+      transition: background 0.12s;
+    }
+    .glance-item:active {
+      background: var(--tint-primary-light);
     }
 
     .glance-item span.count {
       color: var(--tint-primary);
       font-weight: 800;
       background: var(--tint-primary-light);
-      padding: 1px 6px;
+      padding: 1px 5px;
       border-radius: 6px;
+      font-size: 11px;
     }
 
     /* CATEGORY & FEATURES DROPDOWN SYSTEM ("SỔ RA CỰC PHÊ") */
@@ -1344,12 +1350,20 @@
           </div>
         </div>
 
-        <!-- Quick Glance Summary Bar -->
+        <!-- Quick Glance Summary Bar - Vừa khít 100% 4 cột không tràn, bấm vào là lọc nhanh -->
         <div class="glance-strip" id="glanceStrip">
-          <div class="glance-item">💧 Nước: <span class="count" id="glanceWater">0</span></div>
-          <div class="glance-item">📚 Học tập: <span class="count" id="glanceStudy">0</span></div>
-          <div class="glance-item">💼 Công việc: <span class="count" id="glanceWork">0</span></div>
-          <div class="glance-item">💬 Giao tiếp: <span class="count" id="glanceSocial">0</span></div>
+          <div class="glance-item" onclick="selectCategoryMenu('routine', '🏡', 'Sinh hoạt', 12)" title="Xem mục Nước / Sinh hoạt">
+            <span>💧 Nước</span> <span class="count" id="glanceWater">0</span>
+          </div>
+          <div class="glance-item" onclick="selectCategoryMenu('study', '📚', 'Học tập & Thi cử', 8)" title="Xem mục Học tập">
+            <span>📚 Học</span> <span class="count" id="glanceStudy">0</span>
+          </div>
+          <div class="glance-item" onclick="selectCategoryMenu('work', '💼', 'Công việc & Nhóm', 8)" title="Xem mục Công việc">
+            <span>💼 Việc</span> <span class="count" id="glanceWork">0</span>
+          </div>
+          <div class="glance-item" onclick="selectCategoryMenu('social', '💬', 'Giao tiếp & Bạn bè', 6)" title="Xem mục Giao tiếp">
+            <span>💬 Chat</span> <span class="count" id="glanceSocial">0</span>
+          </div>
         </div>
 
         <!-- 4-Column Activity Grid -->
